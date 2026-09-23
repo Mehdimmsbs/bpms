@@ -1,0 +1,8 @@
+ "use client";
+import Link from "next/link"; import {useEffect,useState} from "react"; import {Header,Card,fa,readJSON} from "@/components/ui";
+export default function Dashboard(){const [org,setOrg]=useState<any>(null);const [subs,setSubs]=useState<any[]>([]);const [items,setItems]=useState<any[]>([]);
+useEffect(()=>{setOrg(readJSON("budgetOrg",null));setSubs(readJSON("budgetSubs",[]));setItems(readJSON("budgetItems",[]))},[]);
+return <><Header eyebrow="صفحه اصلی" title="داشبورد" pill={org?.name||"شرکت انتخاب نشده"}/>
+<section className="hero"><div><small>سیستم برنامه‌ریزی، بودجه‌ریزی و کنترل عملکرد</small><h2>به سامانه مدیریت بودجه خوش آمدید</h2><p>اطلاعات پایه سازمان را تکمیل کنید و سپس بودجه‌ریزی را شروع کنید.</p></div><div><Link className="btn white" href="/company">🏢 معرفی شرکت</Link> <Link className="btn white" href="/budget-items">🧮 موتور نیاز</Link></div></section>
+<div className="stats"><div className="stat"><span>سازمان اصلی</span><b>{org?1:0}</b></div><div className="stat"><span>شرکت‌های زیرمجموعه</span><b>{subs.length}</b></div><div className="stat"><span>اقلام بودجه</span><b>{items.length}</b></div><div className="stat"><span>وضعیت</span><b>{org?"فعال":"شروع نشده"}</b></div></div>
+<Card><h3>مسیر پیشنهادی راه‌اندازی</h3><div className="grid"><Link className="btn secondary" href="/company">۱. معرفی سازمان</Link><Link className="btn secondary" href="/subsidiaries">۲. ثبت زیرمجموعه‌ها</Link><Link className="btn secondary" href="/capacity">۳. تعریف ظرفیت</Link><Link className="btn secondary" href="/goals">۴. تعریف اهداف</Link><Link className="btn secondary" href="/budget-items">۵. تعریف اقلام و منطق نیاز</Link></div></Card></> }
